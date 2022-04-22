@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     });
 
                     if(dataEmail.text.isNotEmpty && dataPassword.text.isNotEmpty){
-                      Navigator.pushNamed(context, "/home", arguments: {
+                      Navigator.pushNamed(context, "/main", arguments: {
                         'email': dataEmail.text.toString(),
                         'password': dataPassword.text.toString(),
                       });

@@ -15,6 +15,7 @@ class _RegistrationSecondPageState extends State<RegistrationSecondPage> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -78,7 +79,7 @@ class _RegistrationSecondPageState extends State<RegistrationSecondPage> {
                       _validate_login = true;
                     }else{
                       _validate_login = false;
-                      Navigator.pushNamed(context, "/home", arguments: {
+                      Navigator.pushNamed(context, "/main", arguments: {
                         'email': data['email'],
                         'password':data['password'],
                         'name': dataLogin.text.toString()
