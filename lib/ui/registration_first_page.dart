@@ -6,8 +6,11 @@ class RegistrationFirstPage extends StatefulWidget {
 }
 
 class _RegistrationFirstPageState extends State<RegistrationFirstPage> {
-  final data_email = TextEditingController();
-  final data_password = TextEditingController();
+  final dataEmail = TextEditingController();
+  final dataPassword = TextEditingController();
+
+  bool _validate_email = false;
+  bool _validate_password = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +37,9 @@ class _RegistrationFirstPageState extends State<RegistrationFirstPage> {
             height: 24,
           ),
           TextField(
-            controller: data_email,
+            controller: dataEmail,
             decoration: InputDecoration(
+              errorText: _validate_email ? 'Email address can\'t be empty' : null,
                 hintText: 'Email address',
                 contentPadding: EdgeInsets.symmetric(vertical: 6,
                 horizontal: 12),
@@ -57,9 +61,11 @@ class _RegistrationFirstPageState extends State<RegistrationFirstPage> {
           height: 16,
         ),
         TextField(
-          controller: data_password,
+          obscureText: true,
+          controller: dataPassword,
           decoration: InputDecoration(
             hintText: 'Password',
+            errorText: _validate_password ? 'Password can\'t be empty' : null,
             contentPadding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
@@ -92,10 +98,17 @@ class _RegistrationFirstPageState extends State<RegistrationFirstPage> {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, "/registration_second", arguments: {
-              'email': data_email.text.toString(),
-              'password': data_password.text.toString(),
+            setState(() {
+              dataEmail.text.isEmpty ? _validate_email = true : _validate_email = false;
+              dataPassword.text.isEmpty ? _validate_password = true : _validate_password = false;
             });
+
+            if(dataEmail.text.isNotEmpty && dataPassword.text.isNotEmpty){
+              Navigator.pushNamed(context, "/registration_second", arguments: {
+                'email': dataEmail.text.toString(),
+                'password': dataPassword.text.toString(),
+              });
+            }
           },
           style: TextButton.styleFrom(
             backgroundColor: Colors.black,

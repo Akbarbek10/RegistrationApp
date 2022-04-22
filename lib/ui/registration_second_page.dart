@@ -6,7 +6,8 @@ class RegistrationSecondPage extends StatefulWidget {
 }
 
 class _RegistrationSecondPageState extends State<RegistrationSecondPage> {
-  final data_login = TextEditingController();
+  final dataLogin = TextEditingController();
+  bool _validate_login = false;
   Map data = {};
 
   @override
@@ -36,9 +37,10 @@ class _RegistrationSecondPageState extends State<RegistrationSecondPage> {
                 height: 24,
               ),
               TextField(
-                controller: data_login,
+                controller: dataLogin,
                 decoration: InputDecoration(
                   hintText: 'Full name',
+                  errorText: _validate_login ? 'Enter your full name' : null,
                   contentPadding: EdgeInsets.symmetric(vertical: 6,horizontal: 12),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -71,11 +73,19 @@ class _RegistrationSecondPageState extends State<RegistrationSecondPage> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/home", arguments: {
-                    'email': data['email'],
-                    'password':data['password'],
-                    'name': data_login.text.toString()
+                  setState(() {
+                    if(dataLogin.text.isEmpty){
+                      _validate_login = true;
+                    }else{
+                      _validate_login = false;
+                      Navigator.pushNamed(context, "/home", arguments: {
+                        'email': data['email'],
+                        'password':data['password'],
+                        'name': dataLogin.text.toString()
+                      });
+                    }
                   });
+
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.black,
