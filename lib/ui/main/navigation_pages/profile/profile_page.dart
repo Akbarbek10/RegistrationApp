@@ -12,17 +12,18 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   List<String> imageList = [];
 
-  // Map data = {};
+  Map data = {};
 
   @override
   Widget build(BuildContext context) {
-    // data = ModalRoute.of(context)!.settings.arguments as Map;
-    //
-    // String? name = data['name'];
-    // String email = data['email'];
-    // String password = data['password'];
-    //
-    // bool isNameKnown = name != null;
+    data = ModalRoute.of(context)!.settings.arguments as Map;
+    print(data.toString());
+
+    String? name = data['name'];
+    String email = data['email'];
+    String password = data['password'];
+
+    bool isNameKnown = name != null;
 
     loadImages();
 
@@ -47,12 +48,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 10),
               Visibility(
-                // visible: isNameKnown,
-                visible: true,
+                visible: isNameKnown,
+                // visible: true,
                 child: Center(
                   child: Text(
-                    // "Full name:\n$name",
-                    "Umidaxon",
+                    "Name: $name",
+                    // "Umidaxon",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -64,13 +65,23 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 4),
               Center(
                   child: Text(
-                // "Email: $email",
-                "@umida12",
+                "Email: $email",
+                // "@umida12",
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: "Comfortaa",
                 ),
               )),
+              SizedBox(height: 4),
+              Center(
+                  child: Text(
+                    "Password: $password",
+                    // "@umida12",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Comfortaa",
+                    ),
+                  )),
               SizedBox(
                 height: 10,
               ),
